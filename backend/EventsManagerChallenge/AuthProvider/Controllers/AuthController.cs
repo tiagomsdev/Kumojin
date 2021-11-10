@@ -1,4 +1,5 @@
 ﻿using AuthProvider.Auth;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace AuthProvider.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyPolicy")]
     [ApiController]
     public class AuthController : ControllerBase
     {

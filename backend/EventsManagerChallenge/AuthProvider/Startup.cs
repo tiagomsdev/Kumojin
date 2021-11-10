@@ -28,6 +28,14 @@ namespace AuthProvider
         {
 
             services.AddControllers();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthProvider", Version = "v1" });
@@ -39,6 +47,7 @@ namespace AuthProvider
             };
 
             services.AddSingleton<IUserService>(new UserService(users));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +61,8 @@ namespace AuthProvider
             }
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
 
