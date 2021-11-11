@@ -49,7 +49,7 @@ namespace EventsManagerApi.Controllers
                 return new ConflictResult();
 
             this._rep.Insert(newEvent);
-            return new OkResult();
+            return CreatedAtAction("GetAllEvents", new { id = newEvent.idEvent }, newEvent);
         }
     }
 }

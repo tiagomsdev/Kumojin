@@ -9,7 +9,7 @@ import axios from "axios";
 import {EventManagerUrl} from "../../common/constants";
 import{parseCookies} from "nookies";
 
-function EventForm({handleClose}) {
+function EventForm({handleClose, handleCreateEvent }) {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [startDate, setStartDate] = useState(null);
@@ -25,9 +25,9 @@ function EventForm({handleClose}) {
              startDate: startDate,
              endDate: endDate
           }
+          handleOnSubmit(newEvent);
           handleCreateEvent(newEvent);
           handleClose();
-          //console.log(`Token no form: ${token}`);
       }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -68,9 +68,6 @@ function EventForm({handleClose}) {
                 value={startDate}
                 onChange={(newStartDate) => {
                     setStartDate(moment.utc(newStartDate).format());
-                    /*let dataUtc = moment.utc(newStartDate).format();
-                    console.log(`valor da data UTC: ${dataUtc}`);
-                    console.log(`valor da data reconvertido: ${moment.tz(dataUtc,moment.tz.guess())}`);*/
                 }}
                 />
             </LocalizationProvider>
@@ -99,7 +96,7 @@ function EventForm({handleClose}) {
   );
 }
 
-function handleCreateEvent(newEvent) {
+function handleOnSubmit(newEvent) {
   const cookies = parseCookies();
   const headers = {
          'Content-Type': "application/json",
@@ -107,6 +104,7 @@ function handleCreateEvent(newEvent) {
   };
   axios.post(EventManagerUrl,newEvent,{headers})
     .then(function (response) {
+     // handleEventList(response.data)     
       console.log(response.data);
     })
     .catch(function (error) {

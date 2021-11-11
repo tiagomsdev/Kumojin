@@ -9,10 +9,27 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import EventDialog from "../components/CreateEvent/EventDialog";
 import EventList from "../components/EventList/EventList";
+import {getUserTimezone, getUserDateFromUtc} from "../helpers/momentTimeZone";
 
 
 function Home() {
-    const[eventList, setEventList] = useState([]);
+   const[eventList, setEventList] = useState([]);
+
+   const handleEventList = (data) =>{
+       const newEventList  = [...data];
+       newEventList.map((item) => (
+           item.startDate = getUserDateFromUtc(item.startDate, getUserTimezone()),
+           item.endDate = getUserDateFromUtc(item.endDate, getUserTimezone())
+       ));
+
+       setEventList(...eventList,newEventList);
+
+   }
+
+   const handleCreateEvent = (data) => {
+      setEventList(oldEventList => [...oldEventList,data]);
+   }
+
   return (
     <Grid container spacing={8.4}  justifyContent="left">
       <Grid item md={12}>
@@ -33,15 +50,16 @@ function Home() {
             sx={{ padding:2 }}>
                 Liste d'événements
               </Typography>
-              <EventDialog/>
+              <EventDialog handleEventList={handleEventList} handleCreateEvent={handleCreateEvent}/>
             </Toolbar>
           </AppBar>    
       </Grid>
       <Grid item justifyContent="left">
-          <EventList eventList={eventList} setEventList={setEventList}/>
+          <EventList handleEventList={handleEventList} eventList={eventList}/>
       </Grid>
     </Grid>
   );
 }
+
 
 export default Home;

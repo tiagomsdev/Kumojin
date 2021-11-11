@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import EventForm from "./EventForm";
 
-function EventDialog({getUserTokenCookie}) {
+function EventDialog({handleCreateEvent}) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen(){
@@ -27,7 +27,7 @@ function EventDialog({getUserTokenCookie}) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Créer un événement</DialogTitle>
         <DialogContent>
-          <EventForm handleClose={handleClose} getUserTokenCookie={getUserTokenCookie}/>
+          <EventForm handleClose={handleClose} handleCreateEvent={handleCreateEvent}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
