@@ -8,7 +8,7 @@ namespace EventsManagerApi.Repository
 {
     public interface IEventManagerRepository
     {
-        void Insert(Event nEvent);
+        void Insert(Event newEvent);
         List<Event> GetAllEvents();
         Event GetById(Guid id);
 

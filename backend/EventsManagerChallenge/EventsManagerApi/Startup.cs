@@ -32,6 +32,14 @@ namespace EventsManagerChallenge
         {
 
             services.AddControllers();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EventsManagerChallenge", Version = "v1" });
@@ -72,6 +80,8 @@ namespace EventsManagerChallenge
             }
 
             app.UseRouting();
+
+            app.UseCors("MyPolicy");
 
             app.UseAuthorization();
             app.UseAuthentication();

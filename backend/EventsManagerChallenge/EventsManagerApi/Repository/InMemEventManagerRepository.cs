@@ -24,9 +24,9 @@ namespace EventsManagerApi.Repository
             return _Events.SingleOrDefault(x => x.idEvent == id);
         }
 
-        public void Insert(Event nEvent)
+        public void Insert(Event newEvent)
         {
-            _Events.Add(nEvent);
+            _Events.Add(newEvent);
         }
     }
 }

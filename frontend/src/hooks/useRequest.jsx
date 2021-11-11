@@ -17,6 +17,8 @@ const useRequest = (httpRequest, url, body) => {
         console.error(error);
         setError(error);
         setIsLoading(false);
+      }finally{
+        setIsLoading(false);
       }
     };
     getData();

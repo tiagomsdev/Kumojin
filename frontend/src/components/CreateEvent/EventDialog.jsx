@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import EventForm from "./EventForm";
 
-function EventDialog({onSubmit}) {
+function EventDialog({getUserTokenCookie}) {
   const [open, setOpen] = React.useState(false);
 
   function handleClickOpen(){
@@ -21,13 +21,13 @@ function EventDialog({onSubmit}) {
   
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+      <Button variant="contained" onClick={handleClickOpen}>
+        + Nouveau
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Créer un événement</DialogTitle>
         <DialogContent>
-          <EventForm handleClose={handleClose} onSubmit={onSubmit}/>
+          <EventForm handleClose={handleClose} getUserTokenCookie={getUserTokenCookie}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

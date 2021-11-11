@@ -4,8 +4,12 @@ import { TextField, Button, Divider, Grid, Container } from "@material-ui/core";
 import Moment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
+import moment from "moment";
+import axios from "axios";
+import {EventManagerUrl} from "../../common/constants";
+import{parseCookies} from "nookies";
 
-function EventForm({handleClose,onSubmit}) {
+function EventForm({handleClose}) {
   const [eventName, setEventName] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [startDate, setStartDate] = useState(null);
@@ -15,13 +19,20 @@ function EventForm({handleClose,onSubmit}) {
     <Container>
       <form onSubmit={(event) => {
           event.preventDefault();
-          onSubmit({});
+          const newEvent = {
+             name: eventName,
+             description: eventDescription,
+             startDate: startDate,
+             endDate: endDate
+          }
+          handleCreateEvent(newEvent);
           handleClose();
+          //console.log(`Token no form: ${token}`);
       }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              id="eventName"
+              name="eventName"
               label="Nom de l'événement"
               type="text"
               variant="outlined"
@@ -36,7 +47,7 @@ function EventForm({handleClose,onSubmit}) {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="eventDescription"
+              name="eventDescription"
               label="Description de l'événement"
               type="text"
               fullWidth
@@ -51,12 +62,12 @@ function EventForm({handleClose,onSubmit}) {
           <Grid item xs={12}>
             <LocalizationProvider dateAdapter={Moment}>
                 <DateTimePicker
-                id="startDate"
+                name="startDate"
                 renderInput={(props) => <TextField {...props} />}
                 label="Data/heure de début"
                 value={startDate}
                 onChange={(newStartDate) => {
-                    setStartDate(newStartDate);
+                    setStartDate(moment.utc(newStartDate).format());
                     /*let dataUtc = moment.utc(newStartDate).format();
                     console.log(`valor da data UTC: ${dataUtc}`);
                     console.log(`valor da data reconvertido: ${moment.tz(dataUtc,moment.tz.guess())}`);*/
@@ -67,12 +78,12 @@ function EventForm({handleClose,onSubmit}) {
             <Grid item xs={12}>
             <LocalizationProvider dateAdapter={Moment}>
                 <DateTimePicker
-                    id="endDate"
+                    name="endDate"
                     renderInput={(props) => <TextField {...props} />}
                     label="Data/heure de fin"
                     value={endDate}
                     onChange={(newEndDate) => {
-                        setEndDate(newEndDate);
+                        setEndDate(moment.utc(newEndDate).format());
                 }}
                 />
             </LocalizationProvider>
@@ -87,5 +98,21 @@ function EventForm({handleClose,onSubmit}) {
     </Container>
   );
 }
+
+function handleCreateEvent(newEvent) {
+  const cookies = parseCookies();
+  const headers = {
+         'Content-Type': "application/json",
+         'Authorization': `Bearer ${cookies['USER_TOKEN']}`,
+  };
+  axios.post(EventManagerUrl,newEvent,{headers})
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
 
 export default EventForm;

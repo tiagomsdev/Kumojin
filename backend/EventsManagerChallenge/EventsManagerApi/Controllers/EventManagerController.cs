@@ -1,6 +1,7 @@
 ﻿using EventsManagerApi.Models;
 using EventsManagerApi.Repository;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace EventsManagerApi.Controllers
 {
     [Authorize(AuthenticationSchemes = "JwtBearer")]
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class EventManagerController : ControllerBase
@@ -23,7 +25,6 @@ namespace EventsManagerApi.Controllers
         }
 
         [HttpGet]
-        [Route("all")]
         public List<Event> GetAllEvents()
         {
             return this._rep.GetAllEvents();
@@ -41,13 +42,13 @@ namespace EventsManagerApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddEvent([FromBody] Event nEvent)
+        public IActionResult AddEvent([FromBody] Event newEvent)
         {
-            var exists = _rep.GetById(nEvent.idEvent);
+            var exists = _rep.GetById(newEvent.idEvent);
             if (exists != null)
                 return new ConflictResult();
 
-            this._rep.Insert(nEvent);
+            this._rep.Insert(newEvent);
             return new OkResult();
         }
     }
