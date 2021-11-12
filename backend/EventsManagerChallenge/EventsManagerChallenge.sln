@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManagerApi", "EventsManagerApi\EventsManagerApi.csproj", "{8B1922FB-81B5-40DC-94B6-F7C02B4FE98C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventsManagerApi", "EventsManagerApi\EventsManagerApi.csproj", "{8B1922FB-81B5-40DC-94B6-F7C02B4FE98C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthProvider", "AuthProvider\AuthProvider.csproj", "{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthProvider", "AuthProvider\AuthProvider.csproj", "{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{2A4C133A-957F-41AB-AE12-9EB1174EDC41}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0DE384DC-82E3-43EC-B0C5-1F207CD92E98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventsManager.Test", "EventsManager.Test\EventsManager.Test.csproj", "{EC9E717A-300E-4A50-BB28-26A237139391}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +27,18 @@ Global
 		{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9E717A-300E-4A50-BB28-26A237139391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9E717A-300E-4A50-BB28-26A237139391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9E717A-300E-4A50-BB28-26A237139391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9E717A-300E-4A50-BB28-26A237139391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8B1922FB-81B5-40DC-94B6-F7C02B4FE98C} = {0DE384DC-82E3-43EC-B0C5-1F207CD92E98}
+		{D2A9535A-C3FF-49BB-B68A-ACE57FFC389A} = {0DE384DC-82E3-43EC-B0C5-1F207CD92E98}
+		{EC9E717A-300E-4A50-BB28-26A237139391} = {2A4C133A-957F-41AB-AE12-9EB1174EDC41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DA8DBF65-FDDB-40A6-AC53-1E3BA493F128}

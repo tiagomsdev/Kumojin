@@ -8,25 +8,25 @@ namespace EventsManagerApi.Repository
 {
     public class InMemEventManagerRepository : IEventManagerRepository
     {
-        List<Event> _Events;
+        private readonly List<Event> _events;
 
         public InMemEventManagerRepository()
         {
-            _Events = new List<Event>();
+            _events = new List<Event>();
         }
         public List<Event> GetAllEvents()
         {
-            return _Events;
+            return _events;
         }
 
         public Event GetById(Guid id)
         {
-            return _Events.SingleOrDefault(x => x.idEvent == id);
+            return _events.SingleOrDefault(x => x.idEvent == id);
         }
 
         public void Insert(Event newEvent)
         {
-            _Events.Add(newEvent);
+            _events.Add(newEvent);
         }
     }
 }

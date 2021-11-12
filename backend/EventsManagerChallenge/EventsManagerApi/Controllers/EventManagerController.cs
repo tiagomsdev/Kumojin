@@ -25,9 +25,10 @@ namespace EventsManagerApi.Controllers
         }
 
         [HttpGet]
-        public List<Event> GetAllEvents()
+        public IActionResult GetAllEvents()
         {
-            return this._rep.GetAllEvents();
+            var eventList = this._rep.GetAllEvents();
+            return Ok(eventList);
         }
 
         [HttpGet("{id}")]
@@ -44,6 +45,11 @@ namespace EventsManagerApi.Controllers
         [HttpPost]
         public IActionResult AddEvent([FromBody] Event newEvent)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var exists = _rep.GetById(newEvent.idEvent);
             if (exists != null)
                 return new ConflictResult();
