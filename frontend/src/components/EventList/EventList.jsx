@@ -34,7 +34,7 @@ function EventList({ eventList, handleEventList }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 800 }} aria-label="simple table">
-        <TableHead>
+        <TableHead data-testid="eventList-tableHead">
           <TableRow>
             <TableCell>Nom de l'événement</TableCell>
             <TableCell align="left">Description de l'événement</TableCell>
@@ -42,13 +42,13 @@ function EventList({ eventList, handleEventList }) {
             <TableCell align="left">Date/Heure de fin</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody data-testid="eventList-tablebody">
           {eventList.map((row, idx) => (
             <TableRow
               key={idx}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell data-testid="eventList-tableCell" component="th" scope="row">
                 {row.name}
               </TableCell>
               <TableCell align="left">{row.description}</TableCell>

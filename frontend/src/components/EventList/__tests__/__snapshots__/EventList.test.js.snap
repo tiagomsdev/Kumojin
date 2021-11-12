@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should matches EventList snapshot 1`] = `
+<div
+  className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiTableContainer-root css-11xur9t-MuiPaper-root-MuiTableContainer-root"
+>
+  <table
+    aria-label="simple table"
+    className="MuiTable-root css-nv4u2v-MuiTable-root"
+    role={null}
+  >
+    <thead
+      className="MuiTableHead-root css-15wwp11-MuiTableHead-root"
+      data-testid="eventList-tableHead"
+      role={null}
+    >
+      <tr
+        className="MuiTableRow-root MuiTableRow-head css-1q1u3t4-MuiTableRow-root"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-sizeMedium css-1ygcj2i-MuiTableCell-root"
+          scope="col"
+        >
+          Nom de l'événement
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ygcj2i-MuiTableCell-root"
+          scope="col"
+        >
+          Description de l'événement
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ygcj2i-MuiTableCell-root"
+          scope="col"
+        >
+          Date/Heure de début
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-head MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ygcj2i-MuiTableCell-root"
+          scope="col"
+        >
+          Date/Heure de fin
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root css-apqrd9-MuiTableBody-root"
+      data-testid="eventList-tablebody"
+      role={null}
+    >
+      <tr
+        className="MuiTableRow-root css-34nofg-MuiTableRow-root"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+          data-testid="eventList-tableCell"
+          scope="row"
+        >
+          test1
+        </th>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          test1
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          Nov 11th 2021, 6:30 pm
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          Nov 11th 2021, 6:30 pm
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root css-34nofg-MuiTableRow-root"
+        role={null}
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+          data-testid="eventList-tableCell"
+          scope="row"
+        >
+          test2
+        </th>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          test2
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          Nov 11th 2021, 6:30 pm
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root MuiTableCell-body MuiTableCell-alignLeft MuiTableCell-sizeMedium css-1ex1afd-MuiTableCell-root"
+        >
+          Nov 11th 2021, 8:19 pm
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

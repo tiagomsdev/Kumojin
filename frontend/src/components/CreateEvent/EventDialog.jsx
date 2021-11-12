@@ -21,12 +21,12 @@ function EventDialog({handleCreateEvent}) {
   
   return (
     <div>
-      <Button variant="contained" onClick={handleClickOpen}>
+      <Button data-testid="newEvent-button" variant="contained" onClick={handleClickOpen}>
         + Nouveau
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Créer un événement</DialogTitle>
-        <DialogContent>
+        <DialogContent data-testid="eventDialog-content">
           <EventForm handleClose={handleClose} handleCreateEvent={handleCreateEvent}/>
         </DialogContent>
         <DialogActions>

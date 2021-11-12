@@ -12,28 +12,30 @@ import EventList from "../components/EventList/EventList";
 import {getUserTimezone, getUserDateFromUtc} from "../helpers/momentTimeZone";
 
 
-function Home() {
+function HomeEvents() {
    const[eventList, setEventList] = useState([]);
 
    const handleEventList = (data) =>{
        const newEventList  = [...data];
-       newEventList.map((item) => (
-           item.startDate = getUserDateFromUtc(item.startDate, getUserTimezone()),
-           item.endDate = getUserDateFromUtc(item.endDate, getUserTimezone())
-       ));
+       setEventList(...eventList,handleEventTimeZone(newEventList));
+   }
 
-       setEventList(...eventList,newEventList);
-
+   function handleEventTimeZone(data){
+      data.map((item) => (
+        item.startDate = getUserDateFromUtc(item.startDate, getUserTimezone()),
+        item.endDate = getUserDateFromUtc(item.endDate, getUserTimezone())
+      ));
+      return data;
    }
 
    const handleCreateEvent = (data) => {
-      setEventList(oldEventList => [...oldEventList,data]);
+      setEventList(oldEventList => [...oldEventList,...handleEventTimeZone(data)]);
    }
 
   return (
     <Grid container spacing={8.4}  justifyContent="left">
       <Grid item md={12}>
-          <AppBar>
+          <AppBar data-testid="homeEvents-appBar">
             <Toolbar>
               <IconButton
                 size="large"
@@ -50,7 +52,7 @@ function Home() {
             sx={{ padding:2 }}>
                 Liste d'événements
               </Typography>
-              <EventDialog handleEventList={handleEventList} handleCreateEvent={handleCreateEvent}/>
+              <EventDialog handleCreateEvent={handleCreateEvent}/>
             </Toolbar>
           </AppBar>    
       </Grid>
@@ -62,4 +64,4 @@ function Home() {
 }
 
 
-export default Home;
+export default HomeEvents;

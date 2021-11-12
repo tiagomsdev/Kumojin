@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import axios from "axios";
 import { AuthProviderUrl, UserName, Password } from "./common/constants";
 import { useEffect } from "react";
-import Home from "./pages/Home";
+import HomeEvents from "./pages/HomeEvents";
 import nookies from "nookies";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Grid container>
-      <Home />
+      <HomeEvents/>
     </Grid>
   );
 }

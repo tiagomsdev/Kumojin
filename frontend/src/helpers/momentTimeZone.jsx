@@ -6,7 +6,6 @@ export const getUserTimezone = () => {
 
 export const getUserDateFromUtc = (dateUtc,timezone) => {
   const userDate = moment.tz(dateUtc,timezone);
-  //return moment(userDate).format("YYYY-MM-DD HH:mm");
   return moment(userDate).format("MMM Do YYYY, h:mm a");
 };
 

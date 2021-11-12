@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { TextField, Button, Divider, Grid, Container } from "@material-ui/core";
-//import {shiftTimezoneDateToUserDate} from "../../helpers/TimeZone";
 import Moment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateTimePicker from "@mui/lab/DateTimePicker";
@@ -14,10 +13,11 @@ function EventForm({handleClose, handleCreateEvent }) {
   const [eventDescription, setEventDescription] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [errors,setErrors] = useState({ eventName: { valid: true, text: "" }});
   
   return (
     <Container>
-      <form onSubmit={(event) => {
+      <form data-testid="newEvent-form" onSubmit={(event) => {
           event.preventDefault();
           const newEvent = {
              name: eventName,
@@ -26,20 +26,29 @@ function EventForm({handleClose, handleCreateEvent }) {
              endDate: endDate
           }
           handleOnSubmit(newEvent);
-          handleCreateEvent(newEvent);
+          handleCreateEvent([newEvent]);
           handleClose();
       }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              data-testid="eventName-input"
+              required
+              autoFocus
               name="eventName"
               label="Nom de l'événement"
               type="text"
               variant="outlined"
               margin="normal"
               fullWidth
+              inputProps={{
+                maxLength: 32,
+              }}
+              error={!errors.eventName.valid}
+              helperText={errors.eventName.text}
               value={eventName}
               onChange={(event) => setEventName(event.target.value)}
+              onBlur={() => setErrors({ eventName: validateEventName(eventName)})}
             />
           </Grid>
           <Grid item xs={12}>
@@ -47,6 +56,8 @@ function EventForm({handleClose, handleCreateEvent }) {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              data-testid="eventDescription-input"
+              required
               name="eventDescription"
               label="Description de l'événement"
               type="text"
@@ -62,12 +73,14 @@ function EventForm({handleClose, handleCreateEvent }) {
           <Grid item xs={12}>
             <LocalizationProvider dateAdapter={Moment}>
                 <DateTimePicker
+                data-testid="startDate-input"
+                required
+                disablePast
                 name="startDate"
                 renderInput={(props) => <TextField {...props} />}
                 label="Data/heure de début"
                 value={startDate}
-                onChange={(newStartDate) => {
-                    setStartDate(moment.utc(newStartDate).format());
+                onChange={(newStartDate) => {setStartDate(handleDateChange(newStartDate))                
                 }}
                 />
             </LocalizationProvider>
@@ -75,19 +88,21 @@ function EventForm({handleClose, handleCreateEvent }) {
             <Grid item xs={12}>
             <LocalizationProvider dateAdapter={Moment}>
                 <DateTimePicker
+                    data-testid="endDate-input"
+                    required
+                    disablePast
                     name="endDate"
                     renderInput={(props) => <TextField {...props} />}
                     label="Data/heure de fin"
                     value={endDate}
-                    onChange={(newEndDate) => {
-                        setEndDate(moment.utc(newEndDate).format());
-                }}
+                    error={true}
+                    onChange={(newEndDate) => {setEndDate(handleDateChange(newEndDate))}}
                 />
             </LocalizationProvider>
             </Grid>    
           <Grid item>
             <Button variant="contained" color="primary" type="submit" >
-                Finalizar Cadastro
+                Enregistrer
             </Button>
           </Grid>
         </Grid>
@@ -112,5 +127,15 @@ function handleOnSubmit(newEvent) {
     });
 }
 
+function handleDateChange(newDate){
+  return moment.utc(newDate).format();
+}
+
+function validateEventName(name) {
+  console.log(name.length);
+  return name.length > 32
+    ? { valid: false, text:"Le nom de l'événemet doit avoir 32 caractères maximum" }
+    : { valid: true, text: "" };
+}
 
 export default EventForm;
