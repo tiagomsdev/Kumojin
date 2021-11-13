@@ -24,11 +24,11 @@ Le projet EventManager est composé par un système de gestion d’événements,
 
 1. Vouz devez executer à partir de /Kumojin
 
-2. Run `docker-compose up`
+2. Executer `docker-compose up`
 
 ### Container Frontend 
 
-1. à partir de /Kumojin , executer `cd frontend`
+1. À partir de /Kumojin , executer `cd frontend`
 
 2. executer le commande suivante pour faire le build `build -t event-manager-api:dev .`
 
