@@ -105,6 +105,21 @@ namespace EventsManager.Test
         }
 
         [Fact]
+        public void Should_ReturnBadRequest_when_AddingNameGreaterThan32()
+        {
+
+            //Arrange
+            var invalidName = new Event() { name= "TESTTESTTESTTESTTESTTESTTESTTESTTEST", description = "EventTest1", endDate = DateTime.Now, startDate = DateTime.Now };
+
+            //Act
+            _controller.ModelState.AddModelError("Name", "Has more than 32 positions");
+            var badResponse = _controller.AddEvent(invalidName);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(badResponse);
+        }
+
+        [Fact]
         public void Should_ReturnConflictResult_when_AddingSameIdEvent()
         {
 

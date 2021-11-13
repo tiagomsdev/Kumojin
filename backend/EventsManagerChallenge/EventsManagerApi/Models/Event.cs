@@ -14,6 +14,7 @@ namespace EventsManagerApi.Models
         }
         public Guid idEvent { get; set; }
         [Required]
+        [MaxLength(32)]
         public string name { get; set; }
         [Required]
         public string description { get; set; }

@@ -9,7 +9,7 @@ Le projet EventManager est composé par un système de gestion d’événements,
 * [.Net Core](https://dotnet.microsoft.com/download) - Application framework
 * [Nuget](https://www.nuget.org) - Dependency Management
 * [Xunit](https://xunit.net/)  - Test Framework
-* [Docker](https://docs.docker.com)
+* [Docker](https://docs.docker.com) - 
 
 ### Frontend stack
 * [Rectjs](https://reactjs.org/) – Frontend framework
@@ -30,11 +30,11 @@ Le projet EventManager est composé par un système de gestion d’événements,
 
 1. à partir de /Kumojin , executer `cd frontend`
 
-2. executer le commande suivante pour faire le build `docker build -t frontend-kumojin-thomas:dev .`
+2. executer le commande suivante pour faire le build `build -t event-manager-api:dev .`
 
-3. Pour débuter le container, executer `docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 3001:80 frontend-kumojin-thomas:dev`
+3. Pour débuter le container, executer `docker container run -p 3000:3000 event-manager-app`
 
-4. Allez sur localhost:8080
+4. Allez sur http://localhost:3000/
 
 ### Containers Backend 
 
@@ -69,18 +69,24 @@ EventManagerApi
 
 ### Backend
 
-1. At the root of the project, run `cd backend`
-2. Run `yarn` or `npm install`
-3. Run `yarn start` or `npm start`
+EventsManagerApi
 
-## How to run the tests
+1. À partir de /Kumojin, executer `cd backend`
+2. executer `dotnet run --project ./EventsManagerChallenge/EventsManagerApi/EventsManagerApi.csproj`
+
+AuthProvider
+
+1. À partir de /Kumojin, executer `cd backend`
+2. executer `dotnet run --project ./EventsManagerChallenge/AuthProvider/AuthProvider.csproj`
+
+## Executer les tests
 
 ### Frontend
 
-1. At the root of the project, run `cd frontend`
-2. Run `yarn test` or `npm test`
+1. À partir de /Kumojin, executer `cd frontend`
+2. executer `yarn test` ou `npm test`
 
 ### Backend
 
-1. At the root of the project, run `cd backend`
-2. Run `yarn test` or `npm test`
+1. À partir de /Kumojin, executer `cd backend`
+2. executer `dotnet test ./EventsManagerChallenge/EventsManager.Test/EventsManager.Test.csproj`

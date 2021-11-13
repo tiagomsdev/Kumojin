@@ -1,0 +1,38 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+  react-frontend:
+    container_name: event-manager-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - authprovider
+      - eventmanagerapi
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+
+  authprovider:
+    image: authprovider
+    build:
+      context: .
+      dockerfile: backend/EventsManagerChallenge/AuthProvider/Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  eventmanagerapi:
+    image: eventmanagerapi
+    build:
+      context: .
+      dockerfile: backend/EventsManagerChallenge/EventsManagerApi/Dockerfile
+    ports:
+      - 6001:6001
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    
