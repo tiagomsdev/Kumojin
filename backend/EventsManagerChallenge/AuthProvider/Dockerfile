@@ -7,11 +7,11 @@ COPY . ./
 
 RUN dotnet restore
 
-RUN dotnet publish -c release -o out ./EventsManagerApi.csproj
+RUN dotnet publish -c release -o out ./AuthProvider.csproj
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0  AS runtime
 WORKDIR /app
 COPY --from=build /app/out ./
 
-ENTRYPOINT ["dotnet", "EventsManagerApi.dll"]
+ENTRYPOINT ["dotnet", "AuthProvider.dll"]
