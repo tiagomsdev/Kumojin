@@ -22,7 +22,7 @@ public class Event{
 	
 	@Column
 	@NotEmpty(message = "The name is required.")
-	@Size(message = "The length of name cannot be longer than 32 characters.")
+	@Size(max = 32, message = "The length of name cannot be longer than 32 characters.")
 	private String name;
 	
 	@Column
