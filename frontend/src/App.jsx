@@ -20,10 +20,11 @@ function App() {
 const getToken = () => {
   axios
     .post(AuthProviderUrl, {
-      UserName: UserName,
-      Password: Password,
+      userName: UserName,
+      password: Password,
     })
     .then(function (response) {
+      console.log("Token: "+response.data)
       nookies.set(null, "USER_TOKEN", response.data, {
         path: "/",
         maxAge: 86400 * 30,
