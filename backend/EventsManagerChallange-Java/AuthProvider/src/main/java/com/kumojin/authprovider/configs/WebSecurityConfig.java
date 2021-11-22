@@ -32,9 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedMethods(List.of(
                 HttpMethod.GET.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.DELETE.name()
+                HttpMethod.POST.name()
         ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

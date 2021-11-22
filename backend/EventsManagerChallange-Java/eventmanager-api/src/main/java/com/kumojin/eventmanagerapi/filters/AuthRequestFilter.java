@@ -15,17 +15,17 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.kumojin.eventmanagerapi.security.services.MyUserDetailsService;
-import com.kumojin.eventmanagerapi.security.util.JwtUtil;
+import com.kumojin.eventmanagerapi.security.services.UserService;
+import com.kumojin.eventmanagerapi.security.util.TokenUtil;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter{
+public class AuthRequestFilter extends OncePerRequestFilter{
 	
 	 @Autowired
-	 private MyUserDetailsService userDetailsService;
+	 private UserService userDetailsService;
 
 	 @Autowired
-	 private JwtUtil jwtUtil;
+	 private TokenUtil jwtUtil;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

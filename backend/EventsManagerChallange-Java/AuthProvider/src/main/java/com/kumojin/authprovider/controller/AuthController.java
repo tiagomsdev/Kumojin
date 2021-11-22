@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kumojin.authprovider.model.AuthenticationRequest;
 import com.kumojin.authprovider.service.UserService;
-import com.kumojin.authprovider.util.JwtUtil;
+import com.kumojin.authprovider.util.TokenUtil;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,15 +24,11 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 	
 	@Autowired
-	private UserService userDetailsService;
+	private UserService userService;
 	
 	@Autowired
-	private JwtUtil jwtTokenUtil;
+	private TokenUtil jwtTokenUtil;
 	
-	@GetMapping
-	public String hello() {
-		return "Hello World";
-	}
 	
 	@PostMapping
 	public ResponseEntity<?> createAuthenticationToken( @RequestBody AuthenticationRequest authenticationRequest) throws Exception {
@@ -48,8 +43,7 @@ public class AuthController {
 		}
 
 
-		final UserDetails userDetails = userDetailsService
-				.loadUserByUsername(authenticationRequest.getUserName());
+		final UserDetails userDetails = userService.loadUserByUsername(authenticationRequest.getUserName());
 
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 

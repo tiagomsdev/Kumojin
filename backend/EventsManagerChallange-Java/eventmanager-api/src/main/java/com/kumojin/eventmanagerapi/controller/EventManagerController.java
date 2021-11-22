@@ -1,6 +1,7 @@
 package com.kumojin.eventmanagerapi.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -31,22 +32,17 @@ public class EventManagerController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Event> getEventById(@PathVariable Long id){
-		Event event = _service.getById(id);
-		if(event == null) {
-			return ResponseEntity.notFound().build();
-		}
+		Event event;
+		try {
+			event = _service.getById(id);
+        }catch(NoSuchElementException e) {
+        	return ResponseEntity.notFound().build();
+        }
 		return ResponseEntity.ok().body(event);
 	}
 	
 	@PostMapping
 	public ResponseEntity<Event> addEvent(@Valid @RequestBody Event event) {
-		
-		Event exists = _service.getById(event.getIdEvent());
-		
-		if(exists != null) {
-			return ResponseEntity.status(HttpStatus.CONFLICT).build();
-		}
-		
 		Event newEvent = _service.insert(event);
 	    return new ResponseEntity<>(newEvent , HttpStatus.CREATED);
 	    

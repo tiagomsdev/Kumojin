@@ -1,7 +1,6 @@
 package com.kumojin.eventmanagerapi.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +19,8 @@ public class EventManagerService {
 	}
 	
 	public Event getById(Long id) {
-		if(id == null) {
-			return null; 
-		}
-		try {
-            Event event = _repo.findById(id).get();
-            return event;
-        } catch (NoSuchElementException e) {
-        	return null;
-        }
+		Event event = _repo.findById(id).get();
+		return event;
 	}
 	
 	public Event insert(Event event) {

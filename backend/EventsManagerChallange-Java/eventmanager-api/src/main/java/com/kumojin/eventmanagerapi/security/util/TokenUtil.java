@@ -10,7 +10,7 @@ import java.util.function.Function;
 import com.kumojin.eventmanagerapi.security.configs.TokenConfigs;
 
 @Service
-public class JwtUtil {
+public class TokenUtil {
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

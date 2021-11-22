@@ -15,29 +15,27 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.kumojin.eventmanagerapi.filters.JwtRequestFilter;
+import com.kumojin.eventmanagerapi.filters.AuthRequestFilter;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends  WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private UserDetailsService  myUserDetailsService;
+	private UserDetailsService  userDetailService;
 	
 	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
+	private AuthRequestFilter authRequestFilter;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(myUserDetailsService);
+		auth.userDetailsService(userDetailService);
 	}
 	
 	CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedMethods(List.of(
                 HttpMethod.GET.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.DELETE.name()
+                HttpMethod.POST.name()
         ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -55,7 +53,7 @@ public class WebSecurityConfig extends  WebSecurityConfigurerAdapter{
 				.and()
 				.cors()
 				.configurationSource(corsConfigurationSource());
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterBefore(authRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}
 }

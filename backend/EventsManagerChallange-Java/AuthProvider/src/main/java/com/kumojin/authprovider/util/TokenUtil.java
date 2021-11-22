@@ -12,7 +12,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import com.kumojin.authprovider.configs.TokenConfigs;
 
 @Service
-public class JwtUtil {
+public class TokenUtil {
 	
 	public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
