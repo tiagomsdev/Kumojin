@@ -5,11 +5,18 @@ Test technique suivant l'entrevue chez Kumojin.
 ## Notes
 Le projet EventManager est composé par un système de gestion d’événements, l’architecture est composé par trois applications indépendantes, AuthProvider pour gérer la distribution de Jwt tokens , EventManagerApi pour gérer les opérations de création d’évènements et le portail pour l’interface avec l’usager.
 
-### Backend stack
+### Backend stack .Net
 * [.Net Core](https://dotnet.microsoft.com/download) - Application framework
 * [Nuget](https://www.nuget.org) - Dependency Management
 * [Xunit](https://xunit.net/)  - Test Framework
 * [Docker](https://docs.docker.com) - 
+
+### Backend stack Java Spring Boot
+* [Spring Boot](https://spring.io/projects/spring-boot) - Application framework
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [Junit](https://junit.org/junit5/)  - Test Framework
+* [H2](https://www.h2database.com/html/main.html) - InMemory DataBase
+* [Docker](https://docs.docker.com)  
 
 ### Frontend stack
 * [Rectjs](https://reactjs.org/) – Frontend framework
@@ -24,13 +31,19 @@ Le projet EventManager est composé par un système de gestion d’événements,
 
 1. Vouz devez executer à partir de /Kumojin
 
-2. Executer `docker-compose up`
+Pour le backend Spring Boot
+
+2. Executer `docker-compose -f docker-compose.spring.yml up`
+
+Pour le backed .Net Core
+
+2. Executer `docker-compose -f docker-compose.net.yml up`
 
 ### Container Frontend 
 
 1. À partir de /Kumojin , executer `cd frontend`
 
-2. executer le commande suivante pour faire le build `build -t event-manager-api:dev .`
+2. executer le commande suivante pour faire le build `docker build -t event-manager-api:dev .`
 
 3. Pour débuter le container, executer `docker container run -p 3000:3000 event-manager-app`
 
@@ -38,7 +51,7 @@ Le projet EventManager est composé par un système de gestion d’événements,
 
 ### Containers Backend 
 
-AuthProvider
+AuthProvider - .Net Core
 
 1. À partir de /Kumojin, executer `cd backend/EventsManagerChallenge/AuthProvider`
 
@@ -48,7 +61,19 @@ AuthProvider
 
 4. Vous pouvez faire un request de token par postman sur http://localhost:5000/api/auth
 
-EventManagerApi
+AuthProvider - Spring Boot
+
+1. À partir de /Kumojin, executer `cd backend/EventsManagerChallange-Java/AuthProvider`
+
+2. executer le commande pour génerer le .jar `mvn package`
+
+3. executer le commande suivante pour faire le build `docker build -t authprovider-spring .`
+
+4. Pour débuter le container, executer `docker run -d -p  5000:5000 --name authprovider-spring authprovider-spring`
+
+5. Vous pouvez faire un request de token par postman sur http://localhost:5000/api/auth
+
+EventManagerApi - .Net Core
 
 1. À partir de /Kumojin, executer `cd backend/EventsManagerChallenge/EventManagerApi`
 
@@ -57,6 +82,18 @@ EventManagerApi
 3. Pour débuter le container, executer `docker run -d -p  6001:6001 --name eventmanagerapi eventmanagerapi`
 
 4. Vous pouvez faire des requisitions GET et POST par postman sur http://localhost:6001/api/eventmanager/
+
+EventManagerApi - Spring Boot
+
+1. À partir de /Kumojin, executer `cd backend/EventsManagerChallange-Java/eventmanager-api`
+
+2. executer le commande pour génerer le .jar `mvn package`
+
+3. executer le commande suivante pour faire le build `docker build -t eventmanagerapi-spring .`
+
+4. Pour débuter le container, executer `docker run -d -p  6001:6001 --name eventmanagerapi-spring eventmanagerapi-spring`
+
+5. Vous pouvez faire des requisitions GET et POST par postman sur http://localhost:6001/api/eventmanager/
 
 
 ## Executer le frontend & backend manuellement
@@ -69,6 +106,8 @@ EventManagerApi
 
 ### Backend
 
+.Net Core
+
 EventsManagerApi
 
 1. À partir de /Kumojin, executer `cd backend`
@@ -79,6 +118,18 @@ AuthProvider
 1. À partir de /Kumojin, executer `cd backend`
 2. executer `dotnet run --project ./EventsManagerChallenge/AuthProvider/AuthProvider.csproj`
 
+Spring Boot
+
+EventsManagerApi
+
+1. À partir de /Kumojin, executer `cd backend\EventsManagerChallange-Java\eventmanager-api\`
+2. executer `mvn spring-boot:run`
+
+AuthProvider
+
+1. À partir de /Kumojin, executer `cd backend\EventsManagerChallange-Java\AuthProvider\`
+2. executer `mvn spring-boot:run`
+
 ## Executer les tests
 
 ### Frontend
@@ -88,5 +139,12 @@ AuthProvider
 
 ### Backend
 
+.Net Core
+
 1. À partir de /Kumojin, executer `cd backend`
 2. executer `dotnet test ./EventsManagerChallenge/EventsManager.Test/EventsManager.Test.csproj`
+
+Spring Boot
+
+1. 1. À partir de /Kumojin, executer `cd backend\EventsManagerChallange-Java\eventmanager-api\`
+2. executer `mvn test`

@@ -7,15 +7,15 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     depends_on:
-      - authprovider
-      - eventmanagerapi
+      - authprovider-spring
+      - eventmanagerapi-spring
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
 
   authprovider:
-    image: authprovider
+    image: authprovider-spring
     build:
       context: .
       dockerfile: backend/EventsManagerChallenge-Java/AuthProvider/Dockerfile
@@ -24,7 +24,7 @@ services:
       
 
   eventmanagerapi:
-    image: eventmanagerapi
+    image: eventmanagerapi-spring
     build:
       context: .
       dockerfile: backend/EventsManagerChallenge-Java/eventmanager-api/Dockerfile
