@@ -2,36 +2,35 @@ package com.kumojin.authprovider.model;
 
 import java.io.Serializable;
 
-public class AuthenticationRequest implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	private String UserName;
-	private String Password;
-	
-	public AuthenticationRequest() {
-		
-	}
-	
-	public AuthenticationRequest(String username, String password) {
-		this.setUserName(username);
-		this.setPassword(password);
-		
-	}
+public class AuthenticationRequest implements Serializable {
 
-	public String getUserName() {
-		return UserName;
-	}
 
-	public void setUserName(String userName) {
-		this.UserName = userName;
-	}
+    private String username;
+    private String password;
 
-	public String getPassword() {
-		return Password;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setPassword(String password) {
-		this.Password = password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public AuthenticationRequest()
+    {
+
+    }
+
+    public AuthenticationRequest(String username, String password) {
+        this.setUsername(username);
+        this.setPassword(password);
+    }
 }

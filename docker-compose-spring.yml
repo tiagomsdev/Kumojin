@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  react-frontend:
+    container_name: event-manager-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - authprovider
+      - eventmanagerapi
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+
+  authprovider:
+    image: authprovider
+    build:
+      context: .
+      dockerfile: backend/EventsManagerChallenge-Java/AuthProvider/Dockerfile
+    ports:
+      - 5000:5000
+      
+
+  eventmanagerapi:
+    image: eventmanagerapi
+    build:
+      context: .
+      dockerfile: backend/EventsManagerChallenge-Java/eventmanager-api/Dockerfile
+    ports:
+      - 6001:6001
+    
