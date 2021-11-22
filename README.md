@@ -5,7 +5,7 @@ Test technique suivant l'entrevue chez Kumojin.
 ## Notes
 Le projet EventManager est composé par un système de gestion d’événements, l’architecture est composé par trois applications indépendantes, AuthProvider pour gérer la distribution de Jwt tokens , EventManagerApi pour gérer les opérations de création d’évènements et le portail pour l’interface avec l’usager.
 
-### Backend stack .Net
+### Backend stack .Net Core
 * [.Net Core](https://dotnet.microsoft.com/download) - Application framework
 * [Nuget](https://www.nuget.org) - Dependency Management
 * [Xunit](https://xunit.net/)  - Test Framework
@@ -35,7 +35,7 @@ Pour le backend Spring Boot
 
 2. Executer `docker-compose -f docker-compose.spring.yml up`
 
-Pour le backed .Net Core
+Pour le backend .Net Core
 
 2. Executer `docker-compose -f docker-compose.net.yml up`
 
@@ -75,7 +75,7 @@ AuthProvider - Spring Boot
 
 EventManagerApi - .Net Core
 
-1. À partir de /Kumojin, executer `cd backend/EventsManagerChallenge/EventManagerApi`
+1. À partir de /Kumojin, executer `cd backend/EventsManagerChallenge/EventsManagerApi`
 
 2. executer le commande suivante pour faire le build `docker build -t eventmanagerapi .`
 
